@@ -16,7 +16,7 @@ body {
 
 #nav img {
 	display: inline-block;
-	max-width: 0.9em;
+	width: 1.125rem;
 }
 
 .nav-links {
