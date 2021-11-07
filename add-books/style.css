@@ -1,0 +1,11 @@
+#main {
+	width: 100%;
+	min-height: 100vh;
+	max-width: 70em;
+	padding: 2em 2em 4em 2em;
+	gap: 3em;
+}
+
+#nav {
+	padding: 1em 0;
+}
