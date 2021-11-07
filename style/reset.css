@@ -1,0 +1,28 @@
+@import url(font.css);
+
+:root {
+	--main-font: "Zen Antique Soft", serif;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	min-height: 100%;
+}
+
+body {
+	min-height: 100vh;
+	width: 100%;
+	font-family: var(--main-font);
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
