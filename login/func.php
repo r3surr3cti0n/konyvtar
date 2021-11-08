@@ -23,7 +23,7 @@ class login extends func
 
     protected function emailExists($email)
     {
-        $q = "SELECT az FROM felhasznalo WHERE email = :email;";
+        $q = "SELECT f_az FROM felhasznalo WHERE f_email = :email;";
         $stmt = $this->connect()->prepare($q);
         $stmt->bindParam(":email", $email);
 
@@ -32,13 +32,13 @@ class login extends func
 
     protected function checkPwd($email, $pwd)
     {
-        $q = "SELECT jelszo FROM felhasznalo WHERE email = :email;";
+        $q = "SELECT f_jelszo FROM felhasznalo WHERE f_email = :email;";
         $stmt = $this->connect()->prepare($q);
         $stmt->bindParam(":email", $email);
 
         if ($this->checkExe($stmt)) {
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $pwdHashed = $res[0]["jelszo"];   // The result's first row's password.
+            $pwdHashed = $res[0]["f_jelszo"];   // The result's first row's password.
             
             if (password_verify($pwd, $pwdHashed)) {
                 return true;

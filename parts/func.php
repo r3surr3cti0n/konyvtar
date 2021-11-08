@@ -20,7 +20,7 @@ class func extends DBH
     public function changePwd($newPwd, $email)
     {
         $newPwd = password_hash($newPwd, PASSWORD_DEFAULT);
-        $q = "UPDATE felhasznalo SET jelszo = :pwd WHERE email = :email";
+        $q = "UPDATE felhasznalo SET f_jelszo = :pwd WHERE f_email = :email";
         $stmt = $this->connect()->prepare($q);
         $stmt->bindParam(":pwd", $newPwd);
         $stmt->bindParam(":email", $email);
@@ -39,13 +39,13 @@ class func extends DBH
 
     public function isNewPwd($pwd, $email)
     {
-        $q = "SELECT jelszo FROM felhasznalo WHERE email = :email;";
+        $q = "SELECT f_jelszo FROM felhasznalo WHERE f_email = :email;";
         $stmt = $this->connect()->prepare($q);
         $stmt->bindParam(":email", $email);
 
         if ($this->checkExe($stmt)) {
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $pwdHashed = $res[0]["jelszo"];   // The result's first row's password.
+            $pwdHashed = $res[0]["f_jelszo"];   // The result's first row's password.
 
             if (!password_verify($pwd, $pwdHashed)) {
                 return true;
