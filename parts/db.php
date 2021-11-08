@@ -1,6 +1,7 @@
 <?php
 
-class DBH {
+class DBH
+{
     private $db = "konyvtar";
     private $user = "mariadb_user";
     private $pwd = "VBJC5YukDsh@rB";
@@ -10,16 +11,16 @@ class DBH {
     protected function connect()
     {
         $dsn = "mysql:host=localhost;dbname={$this->db}";
-        
+
         try {
             // dbh = Database Handler
             $dbh = new PDO($dsn, $this->user, $this->pwd);
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $dbh;
         } catch (PDOException $e) {
-            echo "<h2>Nem sikerült cstalakozni az adatbázishoz!</h2>";
-            echo "<p>{$e->getMessage()}</p>";
-            die();
+            $_SESSION["conerror"] = $e->getMessage();
+            header("location: /login/");
+            exit();
         }
     }
 }
