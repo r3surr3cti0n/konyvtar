@@ -17,7 +17,7 @@ class DBH {
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $dbh;
         } catch (PDOException $e) {
-            echo "<h2>error!</h2>";
+            echo "<h2>Nem sikerült cstalakozni az adatbázishoz!</h2>";
             echo "<p>{$e->getMessage()}</p>";
             die();
         }
