@@ -94,7 +94,7 @@ body {
 	padding: 0 1em;
 }
 
-#form input {
+.input-cont input {
 	width: 100%;
 	padding: 0.8em 0;
 	border: none;
