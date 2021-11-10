@@ -26,7 +26,24 @@ if (!isset($_SESSION["email"])) {
         <?php
         require_once '../parts/nav.php';
         ?>
+
+        <h2>Töltse fel a .tsv állományt:</h2>
+        <?php
+        if (isset($_SESSION["error"])) {
+            echo $_SESSION["error"];
+            unset($_SESSION["error"]);
+        }
+        ?>
+        <form id="form" action="upload.php" method="POST" enctype="multipart/form-data">
+            <div id="file-box">
+                <label id="file-label" for="tsv">választ...</label>
+                <input id="file" type="file" name="file" required>
+            </div>
+            <input id="submit" type="submit" name="submit" value="Feltölt">
+        </form>
     </div>
+
+    <script src="js/main.js"></script>
 </body>
 
 </html>
