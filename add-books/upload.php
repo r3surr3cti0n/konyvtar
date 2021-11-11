@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// Check if the user is logged in
+if (!isset($_SESSION["email"])) {
+    header("location: ../login/");
+    exit();
+}
+
 require_once '../parts/func.php';
 
 if (isset($_POST["submit"])) {
@@ -10,9 +16,16 @@ if (isset($_POST["submit"])) {
     $fileName = $file["name"];
     $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
 
-    if ($fileExt != "tsv") {
-        $_SESSION["error"] = "<div id='error'>Nem megfelelő a fájl formátuma!</div>";
-        header("location: index.php");
+    if ($fileExt != "xlsx" && $fileExt != "xls") {
+        $_SESSION["error"] = "A fájl formátuma nem megfelelő!";
+        header("location: ./");
         exit();
     }
+
+    $func = new func();
+    $func->uploadFile($file);
+    $func->parseUploadedFile($file, $fileExt);
+} else {
+    header("location: index.php");
+    exit();
 }
