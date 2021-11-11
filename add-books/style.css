@@ -1,3 +1,8 @@
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.212), rgba(0, 0, 0, 0.486)),
+		url(../img/bookshelf.jpg) no-repeat center center / cover;
+}
+
 #main {
 	width: 100%;
 	min-height: 100vh;
@@ -19,7 +24,13 @@
 	position: relative;
 }
 
-#file-box:hover {
+/* 
+	Focus-within: If an element inside the #file-box
+   	is focused (e.g: selected by tab) the style will 
+	apply to the #file-box.
+*/
+#file-box:hover,
+#file-box:focus-within {
 	border-color: black;
 }
 
