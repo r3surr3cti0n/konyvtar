@@ -18,10 +18,3 @@
             <img src="/img/icons/logout.svg">
             Kijelentkezés</a></div>
 </nav>
-
-<!-- <?php
-        // The '/' is important!
-        if ($_SERVER["REQUEST_URI"] == "/profile_page.php") {
-            echo "active-link";
-        }
-        ?> -->
