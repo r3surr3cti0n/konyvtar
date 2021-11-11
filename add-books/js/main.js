@@ -5,7 +5,7 @@ const btn = document.querySelector("#submit");
 file.addEventListener("change", (e) => {
 	const fileName = e.target.files[0].name;
 	const fileExt = fileName.split(".").pop();
-	if (fileExt !== "tsv") {
+	if (fileExt !== "xlsx" && fileExt !== "xls") {
 		displayFilename(fileName);
 		file_label.innerHTML +=
 			"<br><b style='color:red;'>Nem megfelelő fájl formátum.</b>";
@@ -17,7 +17,7 @@ file.addEventListener("change", (e) => {
 });
 
 function displayFilename(fileName) {
-	file_label.innerHTML = `<p>Feltöltve: <b class='file-name'>${fileName}</b></p>`;
+	file_label.innerHTML = `<b class='file-name'>${fileName}</b>`;
 }
 
 function disableBtn(action) {
