@@ -21,11 +21,3 @@ body {
 	align-items: center;
 	gap: 1em;
 }
-
-.logout {
-	align-self: flex-end;
-}
-
-.logout a {
-	color: #000;
-}
