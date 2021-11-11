@@ -20,16 +20,8 @@ session_start();
 
         <?php
         if (isset($_SESSION["error"])) {
+            echo "<div id='error'>{$_SESSION['error']}</div>";
             unset($_SESSION["error"]);
-            echo "<div id='error'>Rossz e-mail cím vagy jelszó!</div>";
-        }
-
-        if (isset($_SESSION["conerror"])) {
-            echo "<div id='error'>Nem sikerült csatlakozni az adatbázishoz!
-            <br><br>
-            <p style='font-weight: 400;'>{$_SESSION["conerror"]}</p>
-            </div>";
-            unset($_SESSION["conerror"]);
         }
         ?>
         <form id="form" action="login.php" method="post">
