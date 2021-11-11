@@ -13,7 +13,7 @@ class login extends func
         //     $this->pwd = $pwd;
 
         if (!$this->emailExists($email) || !$this->checkPwd($email, $pwd)) {
-            $_SESSION["error"] = "true";
+            $_SESSION["error"] = "Rossz e-mail cím vagy jelszó!";
             header("location: /login/");
             exit();
         }
