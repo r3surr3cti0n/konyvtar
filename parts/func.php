@@ -1,19 +1,26 @@
 <?php
 require_once 'db.php';
+require '../vendor/autoload.php';
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Reader\IReader;
 
 class func extends DBH
 {
     // Check if the statement was successful or not
     public function checkExe($stmt)
     {
-        if (!$stmt->execute()) {
-            header("location: ../login/index.php?stmtfailed");
-            exit();
+        // Enable error messages
+        $this->connect()->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        try {
+            $stmt->execute();
+        } catch (PDOException $e) {
+            // $_SESSION['error'] = "{$e->getMessage()}";
+            return false;
         }
 
-        if ($stmt->rowCount() > 0) {
-            return true;
-        }
+        return true;
     }
 
     // Profile page
@@ -50,6 +57,30 @@ class func extends DBH
             if (!password_verify($pwd, $pwdHashed)) {
                 return true;
             }
+        }
+    }
+
+    // Upload page
+    public function uploadFile($file)
+    {
+        if (
+            $file["error"] == UPLOAD_ERR_OK
+            && is_uploaded_file($file['tmp_name'])
+        ) {
+            // Check if the directory exists
+            if (!is_dir("../fajlok/")) {
+                // If the directory creation wasn't successful
+                if (!mkdir("../fajlok", 0700)) {
+                    $_SESSION["error"] = "Directory creation failed";
+                    header("location: index.php");
+                    exit();
+                }
+            }
+            move_uploaded_file($file["tmp_name"], "../fajlok/{$file["name"]}");
+        } else {
+            $_SESSION["error"] = "Hiba történt a fájl feltöltése során.";
+            header("location: index.php");
+            exit();
         }
     }
 }
