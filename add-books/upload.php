@@ -25,6 +25,9 @@ if (isset($_POST["submit"])) {
     $func = new func();
     $func->uploadFile($file);
     $func->parseUploadedFile($file, $fileExt);
+    
+    header("location: index.php");
+    exit();
 } else {
     header("location: index.php");
     exit();
