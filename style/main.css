@@ -59,18 +59,28 @@ body {
 	text-align: center;
 }
 
-#error {
+#error,
+#info {
 	width: 100%;
-	max-width: 18em;
-	padding: 0.4em 0;
-	color: #e14141;
-	border: 1px solid #e14141;
-	background-color: #645a5a1e;
+	max-width: 30em;
+	padding: 0.4em 0.6em;
 	border-radius: 0.25em;
 	text-align: center;
 	font-weight: 700;
 	letter-spacing: 0.6px;
 	margin-bottom: 0.4em;
+}
+
+#error {
+	color: #e14141;
+	border: 1px solid #e14141;
+	background-color: rgb(225, 65, 65, .1);
+}
+
+#info {
+	color: #5ba2e4;
+	border: 1px solid #5ba2e4;
+	background-color: rgba(91, 162, 228, 0.1);
 }
 
 #form {
