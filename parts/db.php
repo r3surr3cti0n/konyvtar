@@ -18,7 +18,7 @@ class DBH
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $dbh;
         } catch (PDOException $e) {
-            $_SESSION["conerror"] = $e->getMessage();
+            $_SESSION["error"] = "Nem sikerült csatlakozni az adatbázishoz!";
             header("location: /login/");
             exit();
         }
