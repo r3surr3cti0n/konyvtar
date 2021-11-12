@@ -36,6 +36,10 @@ if (!isset($_SESSION["email"])) {
             echo "<div id='error'>{$_SESSION['error']}</div>";
             unset($_SESSION["error"]);
         }
+        if (isset($_SESSION["info"])) {
+            echo "<div id='info'>{$_SESSION['info']}</div>";
+            unset($_SESSION["info"]);
+        }
         ?>
         <form id="form" action="upload.php" method="POST" enctype="multipart/form-data">
             <div id="file-box">
