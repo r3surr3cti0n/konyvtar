@@ -3,10 +3,10 @@ body {
 		url(../img/bookshelf.jpg) no-repeat center center / cover;
 }
 
-#main {
+#form {
 	margin-top: 15vh;
 	border-radius: 0.75em;
-	padding: 4em;
-	gap: 1.5em;
+	padding: 2.6em 4em;
 	max-width: 25em;
+	background-color: #fff;
 }

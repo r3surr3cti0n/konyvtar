@@ -2,6 +2,7 @@
 
 class DBH
 {
+    // 
     private $db = "konyvtar";
     private $user = "mariadb_user";
     private $pwd = "VBJC5YukDsh@rB";

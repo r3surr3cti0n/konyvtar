@@ -72,15 +72,13 @@ class func extends DBH
                 // If the directory creation wasn't successful
                 if (!mkdir("../fajlok", 0700)) {
                     $_SESSION["error"] = "Directory creation failed";
-                    header("location: index.php");
-                    exit();
+                    $this->index();
                 }
             }
             move_uploaded_file($file["tmp_name"], "../fajlok/{$file["name"]}");
         } else {
             $_SESSION["error"] = "Hiba történt a fájl feltöltése során.";
-            header("location: index.php");
-            exit();
+            $this->index();
         }
     }
 
@@ -136,8 +134,7 @@ class func extends DBH
             }
         } catch (\PhpOffice\PhpSpreadsheet\Reader\Exception $e) {
             $_SESSION["error"] = "Hiba történt a fájl betöltése közben!";
-            header("location: index.php");
-            exit();
+            $this->index();
         }
 
         $stmt = $this->connect()->prepare($q);
@@ -147,8 +144,64 @@ class func extends DBH
             unlink("../fajlok/{$file}");
         } else {
             $_SESSION["error"] = "Hiba történt a könyvek hozzáadása során!";
-            header("location: index.php");
+            $this->index();
+        }
+    }
+
+    // Search page
+    public function search($search)
+    {
+        $q = 'SELECT * FROM konyv WHERE k_biblio LIKE :search;';
+        $stmt = $this->connect()->prepare($q);
+        $search = "%" . $search . "%";
+        $stmt->bindParam(":search", $search);
+
+        if ($this->checkExe($stmt)) {
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } else {
+            $_SESSION["error"] = "Hiba történt a keresés során! Kérem próbálja újra!";
+            $this->index();
+        }
+    }
+
+    // Email check
+    public function changeEmail($email, $email1, $email2)
+    {
+        // Check if the two email is the same 
+        if ($email1 != $email2) {
+            $_SESSION["error"] = "A két email cím nem egyezik!";
+            $this->index();
+        }
+        // Check if the format of the email is correct
+        if (!filter_var($email1, FILTER_VALIDATE_EMAIL) && !filter_var($email2, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION["error"] = "Az email cím nem megfelelő!";
+            $this->index();
+        }
+        // Check if the email is not the same as the current one
+        if ($email == $email1) {
+            $_SESSION["error"] = "A megadott email cím megegyezik a jelenleg használt email címével! Kérem adjon meg egy új email címet!";
+            $this->index();
+        }
+
+        // If the email is valid try to update it
+        $newEmail = $email1;
+        $q = "UPDATE felhasznalo SET f_email = :newEmail WHERE f_email = :email";
+        $stmt = $this->connect()->prepare($q);
+        $stmt->bindParam(":newEmail", $newEmail);
+        $stmt->bindParam(":email", $email);
+
+        if ($this->checkExe($stmt)) {
+            $_SESSION["info"] = "Sikeresen megváltoztatta az email címét! Kérem jelentkezzen be újra!";
+            header("location: ../login/");
             exit();
         }
+    }
+
+    // Other
+    public function index()
+    {
+        header("location: index.php");
+        exit();
     }
 }

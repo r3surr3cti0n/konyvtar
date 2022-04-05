@@ -3,18 +3,17 @@ body {
 		url(../img/bookshelf.jpg) no-repeat center center / cover;
 }
 
-#main {
+.wrapper {
+	text-align: center;
+}
+
+#form {
 	width: 100%;
-	min-height: 100vh;
-	max-width: 70em;
-	padding: 2em 2em 4em 2em;
-	gap: 1.8em;
 }
 
 #file-box {
 	width: 100%;
 	padding: 2em;
-	text-align: center;
 	border-radius: 0.25em;
 	border: 2px dashed rgba(0, 0, 0, 0.425);
 	position: relative;
@@ -23,7 +22,7 @@ body {
 /* 
 	Focus-within: If an element inside the #file-box
    	is focused (e.g: selected by tab) the style will 
-	apply to the #file-box.
+	be applied to the #file-box.
 */
 #file-box:hover,
 #file-box:focus-within {

@@ -1,0 +1,33 @@
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.212), rgba(0, 0, 0, 0.486)),
+		url(../img/bookshelf.jpg) no-repeat center center / cover;
+}
+
+#main > .wrapper {
+	padding: 0 1em;
+	gap: 2em;
+}
+
+#result {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: stretch;
+	width: 100%;
+	list-style: none;
+	max-height: 35em;
+	overflow-y: scroll;
+	border-radius: 0.25em;
+}
+
+#result li {
+	padding: 1.2em;
+}
+
+#result li:nth-child(odd) {
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+#result li + li {
+	border-top: 1px solid rgb(199, 199, 199);
+}

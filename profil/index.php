@@ -6,13 +6,6 @@ if (!isset($_SESSION["email"])) {
     header("location: ../login/");
     exit();
 }
-
-require_once '../login/func.php';
-require_once '../parts/func.php';
-
-$login = new login();
-$func = new func();
-
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -30,44 +23,50 @@ $func = new func();
     <main id="main">
         <?php
         require_once '../parts/nav.php';
+        echo "<h1 class='title'>Üdvözöllek {$_SESSION["email"]}!</h1>";
         ?>
 
         <div class="wrapper">
             <?php
-            echo "<h1 class='title'>Üdvözöllek {$_SESSION["email"]}!</h1>";
-            if (isset($_POST["submit"])) {
-                $pwd1 = $_POST["pwd1"];
-                $pwd2 = $_POST["pwd2"];
-                if ($func->comparePwds($pwd1, $pwd2)) {
-                    if (!$func->isNewPwd($pwd1, $_SESSION["email"])) {
-                        echo "<div id='error'>Kérem adjon meg egy ÚJ jelszót!</div>";
-                    } else {
-                        if (!$func->changePwd($pwd1, $_SESSION["email"])) {
-                            echo "<div id='error'>Hiba történt!</div>";
-                        } else {
-                            echo "<div><p>Sikeresen megváltoztatta a jelszavát!</p>";
-                            header("refresh:10;url=../parts/logout.php");
-                            echo "<p>A rendszer 10 másodpercen belül kifogja léptetni!</p></div>";
-                        }
-                    }
-                } else {
-                    echo "<div id='error'>A jelszavak nem egyeznek!</div>";
-                }
+            if (isset($_SESSION["error"])) {
+                echo "<div id='error'>{$_SESSION['error']}</div>";
+                unset($_SESSION["error"]);
+            }
+            if (isset($_SESSION["info"])) {
+                echo "<div id='info'>{$_SESSION['info']}</div>";
+                unset($_SESSION["info"]);
             }
             ?>
-            <div class="wrapper">
-                <h2 class="title">Jelszó megváltoztatása</h2>
-                <form id="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                    <div class="input-cont">
-                        <img class="icon" src="/img/icons/pwd.svg" alt="password">
-                        <input name="pwd1" type="password" placeholder="Jelszó" required>
-                    </div>
-                    <div class="input-cont">
-                        <img class="icon" src="/img/icons/pwd.svg" alt="password">
-                        <input name="pwd2" type="password" placeholder="Jelszó újra" required>
-                    </div>
-                    <button name="submit" id="submit" type="submit">Változtat</button>
-                </form>
+            <div class="wrapper row">
+                <div class="wrapper">
+                    <h2 class="title">E-mail cím megváltoztatása</h2>
+                    <form id="form" action="./email.php" method="POST">
+                        <div class="input-cont">
+                            <img class="icon" src="/img/icons/at.svg" alt="email">
+                            <input name="email1" type="email" placeholder="E-mail" required>
+                        </div>
+                        <div class="input-cont">
+                            <img class="icon" src="/img/icons/at.svg" alt="email">
+                            <input name="email2" type="email" placeholder="E-mail újra" required>
+                        </div>
+                        <button name="submit" id="submit" type="submit">Változtat</button>
+                    </form>
+                </div>
+
+                <div class="wrapper">
+                    <h2 class="title">Jelszó megváltoztatása</h2>
+                    <form id="form" action="./pwd.php" method="POST">
+                        <div class="input-cont">
+                            <img class="icon" src="/img/icons/pwd.svg" alt="password">
+                            <input name="pwd1" type="password" minlength="6" maxlength="15" placeholder="Jelszó" required>
+                        </div>
+                        <div class="input-cont">
+                            <img class="icon" src="/img/icons/pwd.svg" alt="password">
+                            <input name="pwd2" type="password" minlength="6" maxlength="15" placeholder="Jelszó újra" required>
+                        </div>
+                        <button name="submit" id="submit" type="submit">Változtat</button>
+                    </form>
+                </div>
             </div>
         </div>
     </main>

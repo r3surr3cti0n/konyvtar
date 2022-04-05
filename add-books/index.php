@@ -27,27 +27,29 @@ if (!isset($_SESSION["email"])) {
         require_once '../parts/nav.php';
         ?>
 
-        <div>
-            <h2>Töltse fel a táblázatot:</h2>
-            <p>Támogatott formátumok: <b>.xls</b>, <b>.xlsx</b></p>
-        </div>
-        <?php
-        if (isset($_SESSION["error"])) {
-            echo "<div id='error'>{$_SESSION['error']}</div>";
-            unset($_SESSION["error"]);
-        }
-        if (isset($_SESSION["info"])) {
-            echo "<div id='info'>{$_SESSION['info']}</div>";
-            unset($_SESSION["info"]);
-        }
-        ?>
-        <form id="form" action="upload.php" method="POST" enctype="multipart/form-data">
-            <div id="file-box">
-                <label id="file-label" for="file">választ...</label>
-                <input id="file" type="file" name="file" required>
+        <div class="wrapper">
+            <div>
+                <h2 class="title">Töltsön fel egy táblázatot:</h2>
+                <p>Támogatott formátumok: <b>.xls</b>, <b>.xlsx</b></p>
             </div>
-            <input id="submit" type="submit" name="submit" value="Feltölt">
-        </form>
+            <?php
+            if (isset($_SESSION["error"])) {
+                echo "<div id='error'>{$_SESSION['error']}</div>";
+                unset($_SESSION["error"]);
+            }
+            if (isset($_SESSION["info"])) {
+                echo "<div id='info'>{$_SESSION['info']}</div>";
+                unset($_SESSION["info"]);
+            }
+            ?>
+            <form id="form" action="upload.php" method="POST" enctype="multipart/form-data">
+                <div id="file-box">
+                    <label id="file-label" for="file">választ...</label>
+                    <input id="file" type="file" name="file" required>
+                </div>
+                <input id="submit" type="submit" name="submit" value="Feltölt">
+            </form>
+        </div>
     </div>
 
     <script src="js/main.js"></script>

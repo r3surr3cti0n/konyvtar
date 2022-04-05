@@ -2,3 +2,8 @@ body {
 	background: linear-gradient(rgba(0, 0, 0, 0.212), rgba(0, 0, 0, 0.486)),
 		url(../img/bookshelf.jpg) no-repeat center center / cover;
 }
+
+.row {
+	flex-direction: row;
+	gap: 4em;
+}
